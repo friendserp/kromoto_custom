@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include custom_kromoto *.css
+recursive-include custom_kromoto *.csv
+recursive-include custom_kromoto *.html
+recursive-include custom_kromoto *.ico
+recursive-include custom_kromoto *.js
+recursive-include custom_kromoto *.json
+recursive-include custom_kromoto *.md
+recursive-include custom_kromoto *.png
+recursive-include custom_kromoto *.py
+recursive-include custom_kromoto *.svg
+recursive-include custom_kromoto *.txt
+recursive-exclude custom_kromoto *.pyc

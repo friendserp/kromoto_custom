@@ -1761,7 +1761,7 @@
   "docstatus": 0,
   "doctype": "Custom Field",
   "dt": "Stock Entry",
-  "fetch_from": "plate_no.delivering_truck_plate_no_",
+  "fetch_from": "delivering_truck_plate_no_.plate_no",
   "fetch_if_empty": 0,
   "fieldname": "plate_no",
   "fieldtype": "Data",

@@ -185,3 +185,28 @@ app_license = "MIT"
 # auth_hooks = [
 #	"custom_kromoto.auth.validate"
 # ]
+
+
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [["module", "=", "Custom Kromoto"]]
+    },
+    {
+        "dt": "Client Script",
+        "filters": [["module", "=", "Custom Kromoto"]]
+    },
+    {
+        "dt": "Server Script",
+        "filters": [["module", "=", "Custom Kromoto"]]
+    },
+    {
+        "dt": "Print Format",
+        "filters": [["module", "=", "Custom Kromoto"]]
+    },
+    {
+        "dt": "DocType",
+        "filters": [["module", "=", "Custom Kromoto"]]
+    }
+]

@@ -21,21 +21,10 @@
   "script": "frappe.ui.form.on('FUEL And LUBRICANT REQUEST FORM', {\n\trefresh(frm) {\n\t\t// your code here\n\t},\n\tprevious_kmrhr:function(frm){\n\t    calculateKmDiff(frm);\n\t    \n\t},\n\tcurrent_kmrhr:function(frm){\n\t    calculateKmDiff(frm);\n\t},\n\tnext_kmrhr:function(frm){\n\t    calculateActual(frm);\n\t    \n\t}\n\t,\n\tpreviously_filled_fuel:function(frm){\n\t    calculateActual(frm);\n\t    \n\t    \n\t}\n})\nfunction calculateKmDiff(frm){\n    let prev=frm.doc.previous_kmrhr;\n    let now =frm.doc.current_kmrhr;\n    \n    if (prev && now) {\n        let actual=now-prev;\n        frm.set_value('next_kmrhr', actual);\n        \n    }\n}\n\nfunction calculateActual(frm){\n    let previousFilled = frm.doc.previously_filled_fuel;\n    let kmDiff = frm.doc.next_kmrhr;\n    \n    if (previousFilled && kmDiff){\n        let actual=  kmDiff / previousFilled ;\n        frm.set_value('actual', actual);\n    \n    }\n}\n\t    ",
   "view": "Form"
  },
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Employee Surveillance",
-  "enabled": 1,
-  "modified": "2026-08-20 14:30:36.714251",
-  "module": "Custom Kromoto",
-  "name": "Employee Surveillance",
-  "script": "frappe.ui.form.on('Employee Surveillance', {\r\n    joining_date: function(frm, cdt, cdn) {\r\n        calculate_date_difference(frm, cdt, cdn);\r\n    },\r\n    record_date: function(frm, cdt, cdn) {\r\n        calculate_date_difference(frm, cdt, cdn);\r\n    },\r\n    basic_salary: function(frm, cdt, cdn) {\r\n        calculate_severance(frm, cdt, cdn);\r\n    }\r\n});\r\n\r\nfunction calculate_date_difference(frm, cdt, cdn) {\r\n    let row = locals[cdt][cdn];\r\n    let joining_date = row.joining_date ? new Date(row.joining_date) : null;\r\n    let record_date = row.record_date ? new Date(row.record_date) : null;\r\n\r\n    if (joining_date && record_date) {\r\n        let diffInMs = record_date - joining_date;\r\n        let totalDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));\r\n\r\n        let years = Math.floor(totalDays / 365.25);\r\n        let remainingDaysAfterYears = totalDays % 365.25;\r\n        let months = Math.floor(remainingDaysAfterYears / 30.44);\r\n        let days = Math.floor(remainingDaysAfterYears % 30.44);\r\n\r\n        frappe.model.set_value(cdt, cdn, 'total_year', years);\r\n        frappe.model.set_value(cdt, cdn, 'total_month', months);\r\n        frappe.model.set_value(cdt, cdn, 'total_date', days);\r\n    } else {\r\n        frappe.model.set_value(cdt, cdn, 'total_year', 0);\r\n        frappe.model.set_value(cdt, cdn, 'total_month', 0);\r\n        frappe.model.set_value(cdt, cdn, 'total_date', 0);\r\n    }\r\n}\r\n\r\nfunction calculate_severance(frm, cdt, cdn) {\r\n    let row = locals[cdt][cdn];\r\n    let total_year = row.total_year || 0;\r\n    let total_month = row.total_month || 0;\r\n    let total_date = row.total_date || 0;\r\n    let basic_salary = row.basic_salary || 0;\r\n\r\n    let result = basic_salary + (total_year - 1) * (basic_salary / 3) + \r\n                 (basic_salary / 3 / 12 * total_month) + \r\n                 (basic_salary / 3 / 365 * total_date);\r\n\r\n    frappe.model.set_value(cdt, cdn, 'severance_amount_in_birr', result);\r\n}\r\n",
-  "view": "Form"
- },
- {
-  "docstatus": 0,
-  "doctype": "Client Script",
-  "dt": "Employee annual leave amount",
+{
+   "docstatus": 0,
+   "doctype": "Client Script",
+   "dt": "Employee annual leave amount",
   "enabled": 1,
   "modified": "2026-08-20 14:30:37.083387",
   "module": "Custom Kromoto",
